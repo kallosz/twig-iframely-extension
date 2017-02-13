@@ -2,8 +2,6 @@
 
 namespace KaLLoSz\Twig\Extension;
 
-use Psr\Http\Message\ResponseInterface;
-
 /**
  * Class IframelyExtension
  * @package KaLLoSz\Twig\Extension
@@ -42,7 +40,7 @@ class IframelyExtension extends \Twig_Extension
      */
     public function getEmbedUrl(string $url): string
     {
-        return $this->getDataFromApi($url);
+        return $this->getDataFromApi($url)->getFirstPlayerHref();
     }
 
     /**
@@ -66,6 +64,9 @@ class IframelyExtension extends \Twig_Extension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'kallosz\twig-iframely-extension';

@@ -35,18 +35,26 @@ class IframelyDTO
     }
 
     /**
-     * @return array
-     */
-    public function getLinks(): array
-    {
-        return $this->data['links'];
-    }
-
-    /**
      * @return string
      */
     public function getHtml(): string
     {
         return $this->data['html'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstPlayerHref(): string
+    {
+        return $this->getLinks()['player'][0]['href'];
+    }
+
+    /**
+     * @return array
+     */
+    public function getLinks(): array
+    {
+        return $this->data['links'];
     }
 }

@@ -37,8 +37,8 @@ class GuzzleClientSpec extends ObjectBehavior
 
         $client->request(
             'GET',
-            IframelyClientInterface::API_URI,
-            ['query' => ['api_key' => 'ApiKey', 'url' => 'http://example.com']]
+            IframelyClientInterface::API_BASE_URI,
+            ['query' => ['api_key' => 'ApiKey', 'url' => 'http://example.com', 'html' => 1]]
         )->willReturn($response);
 
         $this->getUrlData('http://example.com')->shouldBeAnInstanceOf(IframelyDTO::class);

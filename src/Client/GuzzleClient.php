@@ -6,6 +6,12 @@ use GuzzleHttp\ClientInterface;
 use KaLLoSz\Twig\Extension\IframelyClientInterface;
 use KaLLoSz\Twig\Extension\IframelyDTO;
 
+/**
+ * Class GuzzleClient
+ * @package KaLLoSz\Twig\Extension\Client
+ *
+ * @author Patryk Kala <kkallosz@gmail.com>
+ */
 class GuzzleClient implements IframelyClientInterface
 {
     /**
@@ -37,8 +43,8 @@ class GuzzleClient implements IframelyClientInterface
     {
         $response = $this->client->request(
             'GET',
-            IframelyClientInterface::API_URI,
-            ['query' => ['api_key' => $this->apiKey, 'url' => $url]]
+            IframelyClientInterface::API_BASE_URI,
+            ['query' => ['api_key' => $this->apiKey, 'url' => $url, 'html' => 1]]
         );
 
         return new IframelyDTO(json_decode($response->getBody()->getContents(), true));

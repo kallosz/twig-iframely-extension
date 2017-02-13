@@ -8,7 +8,7 @@ namespace KaLLoSz\Twig\Extension;
  */
 interface IframelyClientInterface
 {
-    const API_URI = 'http://iframe.ly/api/iframely';
+    const API_BASE_URI = 'http://iframe.ly/api/iframely';
 
     /**
      * @param string $url
