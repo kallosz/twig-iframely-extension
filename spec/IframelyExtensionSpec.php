@@ -3,6 +3,7 @@
 namespace spec\KaLLoSz\Twig\Extension;
 
 use KaLLoSz\Twig\Extension\IframelyClientInterface;
+use KaLLoSz\Twig\Extension\IframelyDTO;
 use KaLLoSz\Twig\Extension\IframelyExtension;
 use PhpSpec\ObjectBehavior;
 
@@ -29,11 +30,29 @@ class IframelyExtensionSpec extends ObjectBehavior
 
     function it_should_contains_filters()
     {
-        $this->getFilters()->shouldHaveCount(2);
+        $this->getFilters()->shouldHaveCount(1);
+    }
+
+    function it_should_contains_functions()
+    {
+        $this->getFunctions()->shouldHaveCount(1);
     }
 
     function it_should_have_name()
     {
         $this->getName()->shouldReturn('kallosz\twig-iframely-extension');
+    }
+
+    function it_should_return_dto_object(IframelyClientInterface $client, IframelyDTO $iframelyDTO)
+    {
+        $client->getUrlData('http://example.com')->willReturn($iframelyDTO);
+        $this->getDTO('http://example.com')->shouldBeAnInstanceOf(IframelyDTO::class);
+    }
+
+    function it_should_return_embed_html(IframelyClientInterface $client, IframelyDTO $iframelyDTO)
+    {
+        $iframelyDTO->getHTML()->willReturn('<html>http://example.com</html>');
+        $client->getUrlData('http://example.com')->willReturn($iframelyDTO);
+        $this->getEmbedHtml('http://example.com')->shouldReturn('<html>http://example.com</html>');
     }
 }

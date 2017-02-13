@@ -28,7 +28,7 @@ class IframelyExtension extends \Twig_Extension
      *
      * @return IframelyDTO
      */
-    private function getDataFromApi(string $url): IframelyDTO
+    public function getDTO(string $url): IframelyDTO
     {
         return $this->client->getUrlData($url);
     }
@@ -38,29 +38,28 @@ class IframelyExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function getEmbedUrl(string $url): string
+    public function getEmbedHTML(string $url): string
     {
-        return $this->getDataFromApi($url)->getFirstPlayerHref();
+        return $this->getDTO($url)->getHTML();
     }
 
     /**
-     * @param string $url
-     *
-     * @return string
-     */
-    public function getEmbedHtml(string $url): string
-    {
-        return $this->getDataFromApi($url)->getHtml();
-    }
-
-    /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('iframelyUrl', [$this, 'getEmbedUrl']),
-            new \Twig_SimpleFilter('iframelyHtml', [$this, 'getEmbedHtml']),
+            new \Twig_SimpleFilter('iframelyHTML', [$this, 'getEmbedHTML']),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('iframely', [$this, 'getDTO']),
         ];
     }
 

@@ -37,7 +37,7 @@ class IframelyDTO
     /**
      * @return string
      */
-    public function getHtml(): string
+    public function getHTML(): string
     {
         return $this->data['html'];
     }
@@ -48,6 +48,22 @@ class IframelyDTO
     public function getFirstPlayerHref(): string
     {
         return $this->getLinks()['player'][0]['href'];
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAutoplayPlayerHref()
+    {
+        $players = $this->getLinks()['player'];
+
+        foreach ($players as $player) {
+            if (in_array('autoplay', $player['rel'])) {
+                return $player['href'];
+            }
+        }
+
+        return null;
     }
 
     /**
