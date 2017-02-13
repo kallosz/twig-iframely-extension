@@ -19,7 +19,11 @@
         "henrikbjorn/phpspec-code-coverage": "^3.0",
         "squizlabs/php_codesniffer": "^2.8",
         "sebastian/phpcpd": "^3.0",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "doctrine/cache": "^1.6"
+    },
+    "suggest": {
+        "doctrine/cache" : "Can be used for caching."
     },
     "config": {
         "bin-dir": "bin"
