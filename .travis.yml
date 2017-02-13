@@ -1,0 +1,30 @@
+language: php
+php:
+  - 7.0
+  - 7.1
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+before_script:
+  - composer self-update
+  - composer install --prefer-source --no-interaction
+  - if [ "$TRAVIS_PHP_VERSION" == "nightly" ]; then rm phpspec.yml.dist; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "hhvm" ] || [ "$TRAVIS_PHP_VERSION" == "nightly" ]; then cp phpspec-hhvm.yml.dist phpspec.yml.dist; fi
+
+after_script:
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
+
+script:
+  - mkdir -p build/logs
+  - cp phpspec.yml.dist phpspec.yml
+  - bin/phpspec run -c phpspec.yml
+  - cp phpcs.xml.dist phpcs.xml
+  - bin/phpcs --standard=phpcs.xml --extensions=php src
+
+notifications:
+  email:
+    - kkallosz@gmail.com

@@ -1,0 +1,12 @@
+formatter.name: pretty
+suites:
+    iframely_extension_suite:
+        namespace: KaLLoSz\Twig\Extension
+        psr4_prefix: KaLLoSz\Twig\Extension
+
+extensions:
+  PhpSpecCodeCoverage\CodeCoverageExtension:
+    format:
+      - clover
+    output:
+      clover: build/logs/clover.xml

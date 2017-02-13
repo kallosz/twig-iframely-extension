@@ -1,0 +1,42 @@
+{
+    "name": "kallosz/iframely-twig-extension",
+    "description": "Simple Twig extension to fetch Iframely data",
+    "keywords": [
+        "templating",
+        "twig",
+        "iframely",
+        "iframe"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "twig/twig": "^1.24",
+        "guzzlehttp/guzzle": "^6.2",
+        "php": ">= 7.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^3.2",
+        "henrikbjorn/phpspec-code-coverage": "^3.0",
+        "squizlabs/php_codesniffer": "^2.8",
+        "sebastian/phpcpd": "^3.0",
+        "phpmd/phpmd": "^2.6"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "KaLLoSz\\Twig\\Extension\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patryk Kala",
+            "email": "kkallosz@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/kallosz/iframely-twig-extension/issues",
+        "source": "https://github.com/kallosz/iframely-twig-extension"
+    }
+}
