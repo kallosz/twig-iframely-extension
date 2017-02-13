@@ -69,3 +69,4 @@ fabric.properties
 phpcs.xml
 phpspec.yml
 phpmd.xml
+/build/
