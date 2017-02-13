@@ -8,5 +8,7 @@ extensions:
   PhpSpecCodeCoverage\CodeCoverageExtension:
     format:
       - clover
+      - html
     output:
       clover: build/logs/clover.xml
+      html: build/logs/html
