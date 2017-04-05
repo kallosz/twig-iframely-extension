@@ -3,7 +3,6 @@
 namespace KaLLoSz\Twig\Extension\Cache;
 
 use Doctrine\Common\Cache\Cache;
-use Doctrine\Common\Cache\ClearableCache;
 
 /**
  * Class DoctrineCacheBridge
@@ -53,17 +52,5 @@ class DoctrineCacheBridge implements CacheInterface
     public function delete($id)
     {
         return $this->cache->delete($id);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteAll()
-    {
-        if ($this->cache instanceof ClearableCache) {
-            return $this->cache->deleteAll();
-        }
-
-        return false;
     }
 }

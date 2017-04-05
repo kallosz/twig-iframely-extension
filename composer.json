@@ -20,10 +20,12 @@
         "squizlabs/php_codesniffer": "^2.8",
         "sebastian/phpcpd": "^3.0",
         "phpmd/phpmd": "^2.6",
-        "doctrine/cache": "^1.6"
+        "doctrine/cache": "^1.6",
+        "symfony/cache": "^3.2"
     },
     "suggest": {
-        "doctrine/cache" : "Can be used for caching."
+        "doctrine/cache" : "Can be used for caching.",
+        "symfony/cache" : "Can be used for caching."
     },
     "config": {
         "bin-dir": "bin"
