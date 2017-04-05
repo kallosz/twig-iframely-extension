@@ -47,11 +47,4 @@ interface CacheInterface
      * @return boolean TRUE if the cache entry was successfully deleted, FALSE otherwise.
      */
     public function delete($id);
-
-    /**
-     * Deletes all cache entries.
-     *
-     * @return boolean TRUE if the cache entries were successfully deleted, FALSE otherwise.
-     */
-    public function deleteAll();
 }

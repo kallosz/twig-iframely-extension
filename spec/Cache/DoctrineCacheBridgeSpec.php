@@ -3,11 +3,9 @@
 namespace spec\KaLLoSz\Twig\Extension\Cache;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\Cache;
 use KaLLoSz\Twig\Extension\Cache\CacheInterface;
 use KaLLoSz\Twig\Extension\Cache\DoctrineCacheBridge;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * Class DoctrineCacheBridgeSpec
@@ -56,30 +54,5 @@ class DoctrineCacheBridgeSpec extends ObjectBehavior
         $this->has($id)->shouldReturn(true);
         $this->delete($id)->shouldReturn(true);
         $this->has($id)->shouldReturn(false);
-    }
-
-    function it_delete_all_elements()
-    {
-        $id1 = sha1(1);
-        $id2 = sha1(1);
-        $this->save($id1, 1);
-        $this->save($id2, 2);
-        $this->deleteAll()->shouldReturn(true);
-        $this->has($id1)->shouldReturn(false);
-        $this->has($id2)->shouldReturn(false);
-    }
-
-    function it_not_delete_all_elements_if_is_not_clearable_cache(Cache $cache)
-    {
-        $this->beConstructedWith($cache);
-        $cache->save(Argument::any(), Argument::any(), 0)->willReturn(true);
-        $cache->contains(Argument::any())->willReturn(false);
-        $id1 = sha1(1);
-        $id2 = sha1(1);
-        $this->save($id1, 1);
-        $this->save($id2, 2);
-        $this->deleteAll()->shouldReturn(false);
-        $this->has($id1)->shouldReturn(false);
-        $this->has($id2)->shouldReturn(false);
     }
 }
