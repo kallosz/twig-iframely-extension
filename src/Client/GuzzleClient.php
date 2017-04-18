@@ -86,7 +86,7 @@ class GuzzleClient implements IframelyClientInterface
 
             $dto = new IframelyDTO(json_decode($response->getBody()->getContents(), true));
         } catch (GuzzleException $exception) {
-            $this->addLog(LogLevel::ERROR, $exception->getMessage());
+            $this->addLog(LogLevel::ERROR, $exception->getMessage(), $exception);
 
             return new IframelyDTO([]);
         }
@@ -102,13 +102,16 @@ class GuzzleClient implements IframelyClientInterface
     /**
      * @param $level
      * @param string $message
+     * @param null $exception
      */
-    private function addLog($level, string $message)
+    private function addLog($level, string $message, $exception = null)
     {
         if (!$this->logger) {
             return;
         }
 
-        $this->logger->log($level, $message);
+        $this->logger->log($level, $message, [
+            'exception' => $exception
+        ]);
     }
 }
