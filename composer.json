@@ -21,11 +21,13 @@
         "sebastian/phpcpd": "^3.0",
         "phpmd/phpmd": "^2.6",
         "doctrine/cache": "^1.6",
-        "symfony/cache": "^3.2"
+        "symfony/cache": "^3.2",
+        "psr/log": "1.*"
     },
     "suggest": {
         "doctrine/cache" : "Can be used for caching.",
-        "symfony/cache" : "Can be used for caching."
+        "symfony/cache" : "Can be used for caching.",
+        "monolog/monolog": "Can be used as logger."
     },
     "config": {
         "bin-dir": "bin"

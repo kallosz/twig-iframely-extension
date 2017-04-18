@@ -31,7 +31,7 @@ class IframelyDTO
      */
     public function getMeta(): array
     {
-        return $this->data['meta'];
+        return $this->data['meta'] ?? [];
     }
 
     /**
@@ -39,7 +39,7 @@ class IframelyDTO
      */
     public function getHTML(): string
     {
-        return $this->data['html'];
+        return $this->data['html'] ?? '';
     }
 
     /**
@@ -47,7 +47,7 @@ class IframelyDTO
      */
     public function getFirstPlayerHref(): string
     {
-        return $this->getLinks()['player'][0]['href'];
+        return $this->getLinks()['player'][0]['href'] ?? '';
     }
 
     /**
@@ -55,7 +55,7 @@ class IframelyDTO
      */
     public function getAutoplayPlayerHref()
     {
-        $players = $this->getLinks()['player'];
+        $players = $this->getLinks()['player'] ?? [];
 
         foreach ($players as $player) {
             if (in_array('autoplay', $player['rel'])) {
@@ -71,6 +71,6 @@ class IframelyDTO
      */
     public function getLinks(): array
     {
-        return $this->data['links'];
+        return $this->data['links'] ?? [];
     }
 }
