@@ -8,6 +8,7 @@ use KaLLoSz\Twig\Extension\Cache\CacheInterface;
 use KaLLoSz\Twig\Extension\IframelyClientInterface;
 use KaLLoSz\Twig\Extension\IframelyDTO;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 /**
  * Class GuzzleClient
@@ -71,7 +72,7 @@ class GuzzleClient implements IframelyClientInterface
     public function getUrlData(string $url): IframelyDTO
     {
         if ($this->cache && $this->cache->has(CacheInterface::KEY_PREFIX.md5($url))) {
-            $this->addLog(LOG_INFO, 'Data returned from cache.');
+            $this->addLog(LogLevel::INFO, 'Data returned from cache.');
 
             return $this->cache->get(CacheInterface::KEY_PREFIX.md5($url));
         }
@@ -85,14 +86,14 @@ class GuzzleClient implements IframelyClientInterface
 
             $dto = new IframelyDTO(json_decode($response->getBody()->getContents(), true));
         } catch (GuzzleException $exception) {
-            $this->addLog(LOG_ERR, $exception->getMessage());
+            $this->addLog(LogLevel::ERROR, $exception->getMessage());
 
             return new IframelyDTO([]);
         }
 
         if ($this->cache) {
             $this->cache->save(CacheInterface::KEY_PREFIX.md5($url), $dto, CacheInterface::LIFETIME_DAY);
-            $this->addLog(LOG_INFO, 'Cache saved');
+            $this->addLog(LogLevel::INFO, 'Cache saved');
         }
 
         return $dto;
